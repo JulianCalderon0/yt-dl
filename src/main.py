@@ -3,10 +3,10 @@ import json
 from urllib.request import urlopen
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from tools import tools
-from tools.tools import get_path
+import tools
+from tools import get_path
 
-from ui import settings
+import settings
 
 
 class MainUi(QtWidgets.QMainWindow):

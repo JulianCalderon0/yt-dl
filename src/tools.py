@@ -1,6 +1,3 @@
-import os
-
-import pkg_resources
 import requests
 from pytube import YouTube
 
@@ -44,5 +41,4 @@ def download(id, download_folder):
 
 
 def get_path(path):
-    path = pkg_resources.resource_filename(__name__, os.path.join(os.pardir, path))
     return path

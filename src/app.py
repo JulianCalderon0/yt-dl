@@ -4,8 +4,8 @@ import sys
 
 from PyQt5 import QtWidgets
 
-from tools.tools import get_path
-from ui.main import MainUi
+from tools import get_path
+from main import MainUi
 
 
 def create_settings():
@@ -16,6 +16,9 @@ def create_settings():
 
 
 def run():
+    cwd = os.path.dirname(os.path.realpath(__file__))
+    os.chdir(cwd)
+
     # Create settings.json if missing
     path = get_path("resources/settings.json")
     if os.path.exists(path):
