@@ -187,27 +187,6 @@ class MainUi(QtWidgets.QMainWindow):
             self.thumbnail.setPixmap(pixmap)
 
             # Sets description
-            # self.description.setHtml(
-            #     '<html><head><style type="text/css"></style></head>\n'
-            #     "<body>\n"
-            #     '<p align="center" style="margin:15px;">'
-            #     + '<span style=" font-size:12pt;">'
-            #     + title
-            #     + "</span></p>\n"
-            #     '<p align="center" style=" margin:5px;">'
-            #     + '<span style=" font-size:10pt; color:#707070;">'
-            #     + author
-            #     + "</span></p>\n"
-            #     '<p align="center" style=" margin:5px;">'
-            #     + '<span style=" font-size:10pt; color:#707070;">'
-            #     + date
-            #     + "</span></p>\n"  # noqa
-            #     "<br>\n"
-            #     '<p style="margin:0px;"><span style="font-size:9pt;">'
-            #     + description
-            #     + "</span></p>\n",
-            #     "</body></html>",
-            # )
             with open(get_path("resources/static/description.html"), "r") as f:
                 self.description.setHtml(
                     f.read().format(
@@ -215,6 +194,7 @@ class MainUi(QtWidgets.QMainWindow):
                     )
                 )
         else:
+            # Resets thumbnail and description when deselect
             self.resize(641, 220)
             self.thumbnail.setPixmap(
                 QtGui.QPixmap(get_path("resources/imgs/default.jpg"))

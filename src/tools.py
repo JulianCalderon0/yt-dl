@@ -11,13 +11,14 @@ def search(q, key):
         "maxResults": 8,
         "key": key,
     }
-    response = requests.get(url, params=parameters)
 
+    # Retrieve data
+    response = requests.get(url, params=parameters)
     if response.status_code in (400, 403):
         return "error"
-
     data = response.json()
 
+    # Reformat data
     data = data["items"]
     clean_data = {}
     for item in data:
@@ -35,6 +36,7 @@ def search(q, key):
 
 
 def download(id, download_folder):
+    # Download video
     url = "https://www.youtube.com/watch?v=" + id
     yt = YouTube(url)
     yt.streams.first().download(download_folder)

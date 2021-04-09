@@ -16,6 +16,7 @@ def create_settings():
 
 
 def run():
+    # Change cwd to main file dir
     cwd = os.path.dirname(os.path.realpath(__file__))
     os.chdir(cwd)
 
