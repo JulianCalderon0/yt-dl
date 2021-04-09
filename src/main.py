@@ -3,8 +3,8 @@ import json
 from urllib.request import urlopen
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import tools
-from tools import get_path
+import helpers
+from helpers import get_path
 
 import settings
 
@@ -16,7 +16,7 @@ class MainUi(QtWidgets.QMainWindow):
         # Icon Setup
         self.icon = QtGui.QIcon()
         self.icon.addPixmap(
-            QtGui.QPixmap(tools.get_path("resources/imgs/youtube.png")),
+            QtGui.QPixmap(helpers.get_path("resources/imgs/youtube.png")),
         )
 
         # Font Setup
@@ -87,17 +87,17 @@ class MainUi(QtWidgets.QMainWindow):
         self.download.setFont(font)
         self.download.setObjectName("download")
 
-        self.mp3 = QtWidgets.QPushButton(self.download_box_widget)
+        self.audio = QtWidgets.QPushButton(self.download_box_widget)
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
         )
-        self.mp3.setSizePolicy(sizePolicy)
-        self.mp3.setMinimumSize(QtCore.QSize(90, 0))
-        self.mp3.setFont(font)
-        self.mp3.setObjectName("mp3")
+        self.audio.setSizePolicy(sizePolicy)
+        self.audio.setMinimumSize(QtCore.QSize(90, 0))
+        self.audio.setFont(font)
+        self.audio.setObjectName("audio")
 
         self.download_box.addWidget(self.download)
-        self.download_box.addWidget(self.mp3)
+        self.download_box.addWidget(self.audio)
 
         self.layout_2.addWidget(self.list)
         self.layout_2.addWidget(self.download_box_widget)
@@ -132,7 +132,7 @@ class MainUi(QtWidgets.QMainWindow):
 
         self.search.clicked.connect(self.search_button)
         self.download.clicked.connect(self.download_button)
-        self.mp3.clicked.connect(self.mp3_button)
+        self.audio.clicked.connect(self.audio_button)
         self.configuration.clicked.connect(self.config_button)
         self.list.itemSelectionChanged.connect(self.selection_changed)
 
@@ -142,7 +142,7 @@ class MainUi(QtWidgets.QMainWindow):
         self.configuration.setText("Configuracion")
         self.search.setText("Buscar")
         self.download.setText("Descargar")
-        self.mp3.setText("Audio")
+        self.audio.setText("Audio")
 
     def search_button(self):
         # Retrieves API Key
@@ -152,7 +152,7 @@ class MainUi(QtWidgets.QMainWindow):
         # Retrieves API Data
         q = str(self.input.text())
         if q:
-            self.data = tools.search(q, key)
+            self.data = helpers.search(q, key)
             if self.data == "error":
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle("Error")
@@ -185,7 +185,7 @@ class MainUi(QtWidgets.QMainWindow):
 
             self.setWindowTitle("Descargando")
 
-            tools.download(id, download_folder)
+            helpers.download(id, download_folder)
 
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle("Descarga")
@@ -196,7 +196,7 @@ class MainUi(QtWidgets.QMainWindow):
 
             self.setWindowTitle("YouTube")
 
-    def mp3_button(self):
+    def audio_button(self):
         if self.list.selectedItems():
             # Retrieves selected video
             with open(get_path("resources/settings.json"), "r") as f:
@@ -209,7 +209,7 @@ class MainUi(QtWidgets.QMainWindow):
 
             self.setWindowTitle("Descargando")
 
-            tools.download_mp3(id, download_folder)
+            helpers.download_audio(id, download_folder)
 
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle("Descarga")

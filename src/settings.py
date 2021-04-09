@@ -1,7 +1,7 @@
 import json
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from tools import get_path
+from helpers import get_path
 
 
 class SettingsUi(QtWidgets.QWidget):

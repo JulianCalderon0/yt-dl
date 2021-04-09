@@ -1,5 +1,6 @@
 import requests
 from pytube import YouTube
+import json
 
 
 def search(q, key):
@@ -50,3 +51,10 @@ def download_mp3(id, download_folder):
 
 def get_path(path):
     return path
+
+
+def create_settings():
+    # Create empty settings.json
+    with open(get_path("resources/settings.json"), "w") as f:
+        data = {"key": "", "folder": ""}
+        json.dump(data, f)

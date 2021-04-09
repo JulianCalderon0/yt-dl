@@ -4,15 +4,8 @@ import sys
 
 from PyQt5 import QtWidgets
 
-from tools import get_path
 from main import MainUi
-
-
-def create_settings():
-    # Create empty settings.json
-    with open(get_path("resources/settings.json"), "w") as f:
-        data = {"key": "", "folder": ""}
-        json.dump(data, f)
+from helpers import create_settings, get_path
 
 
 def run():
