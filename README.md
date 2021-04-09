@@ -2,6 +2,7 @@
 
 Busca y descarga videos de YouTube (Necesita clave de API)
 
+Archivo principal: app.py
 
 Para funcionar necesita una clave de la API de google:
 -----------------------------------------------------
@@ -18,4 +19,4 @@ Para funcionar necesita una clave de la API de google:
 
 6- Ingresar la clave en la pestaña de configuracion de la app. (YouDL)
 
-7- Especificar la carpeta de descarga. (Por defecto es la carpeta donde esta el .exe)
+7- Especificar la carpeta de descarga. (Por defecto es la carpeta donde esta el .exe/.py)
