@@ -142,7 +142,7 @@ class MainUi(QtWidgets.QMainWindow):
         self.configuration.setText("Configuracion")
         self.search.setText("Buscar")
         self.download.setText("Descargar")
-        self.mp3.setText("Mp3")
+        self.mp3.setText("Audio")
 
     def search_button(self):
         # Retrieves API Key
