@@ -43,7 +43,7 @@ def download(id, download_folder):
     yt.streams.first().download(download_folder)
 
 
-def download_mp3(id, download_folder):
+def download_audio(id, download_folder):
     url = "https://www.youtube.com/watch?v=" + id
     yt = YouTube(url)
     yt.streams.filter(only_audio=True).first().download(download_folder)
