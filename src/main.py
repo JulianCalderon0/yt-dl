@@ -182,6 +182,9 @@ class MainUi(QtWidgets.QMainWindow):
             id = self.data[title]["id"]
 
             # Downloads video
+
+            self.setWindowTitle("Descargando")
+
             tools.download(id, download_folder)
 
             msg = QtWidgets.QMessageBox()
@@ -190,6 +193,8 @@ class MainUi(QtWidgets.QMainWindow):
             msg.setIcon(QtWidgets.QMessageBox.Information)
             msg.setWindowIcon(self.icon)
             msg.exec_()
+
+            self.setWindowTitle("YouTube")
 
     def mp3_button(self):
         if self.list.selectedItems():
@@ -201,6 +206,9 @@ class MainUi(QtWidgets.QMainWindow):
             id = self.data[title]["id"]
 
             # Downloads video
+
+            self.setWindowTitle("Descargando")
+
             tools.download_mp3(id, download_folder)
 
             msg = QtWidgets.QMessageBox()
@@ -209,6 +217,8 @@ class MainUi(QtWidgets.QMainWindow):
             msg.setIcon(QtWidgets.QMessageBox.Information)
             msg.setWindowIcon(self.icon)
             msg.exec_()
+
+            self.setWindowTitle("YouTube")
 
     def selection_changed(self):
         if self.list.selectedItems():
