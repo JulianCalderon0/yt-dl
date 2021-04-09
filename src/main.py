@@ -129,7 +129,6 @@ class MainUi(QtWidgets.QMainWindow):
 
         # Functions
         self.input.setFocus()
-
         self.search.clicked.connect(self.search_button)
         self.download.clicked.connect(self.download_button)
         self.audio.clicked.connect(self.audio_button)
@@ -182,9 +181,7 @@ class MainUi(QtWidgets.QMainWindow):
             id = self.data[title]["id"]
 
             # Downloads video
-
             self.setWindowTitle("Descargando")
-
             helpers.download(id, download_folder)
 
             msg = QtWidgets.QMessageBox()
@@ -206,9 +203,7 @@ class MainUi(QtWidgets.QMainWindow):
             id = self.data[title]["id"]
 
             # Downloads video
-
             self.setWindowTitle("Descargando")
-
             helpers.download_audio(id, download_folder)
 
             msg = QtWidgets.QMessageBox()

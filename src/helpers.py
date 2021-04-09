@@ -54,7 +54,6 @@ def get_path(path):
 
 
 def create_settings():
-    # Create empty settings.json
     with open(get_path("resources/settings.json"), "w") as f:
         data = {"key": "", "folder": ""}
         json.dump(data, f)
