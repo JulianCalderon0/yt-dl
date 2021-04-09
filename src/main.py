@@ -70,7 +70,15 @@ class MainUi(QtWidgets.QMainWindow):
         self.list.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.list.setFont(font)
         self.list.setObjectName("list")
-        self.download = QtWidgets.QPushButton(self.layout_widget_2)
+
+        self.download_box_widget = QtWidgets.QWidget(self.layout_widget_2)
+        self.download_box_widget.setGeometry(QtCore.QRect(10, 50, 621, 161))
+        self.download_box_widget.setObjectName("download_box_widget")
+        self.download_box = QtWidgets.QVBoxLayout(self.download_box_widget)
+        self.download_box.setContentsMargins(0, 0, 0, 0)
+        self.download_box.setObjectName("layoudownload_box")
+
+        self.download = QtWidgets.QPushButton(self.download_box_widget)
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
         )
@@ -79,8 +87,20 @@ class MainUi(QtWidgets.QMainWindow):
         self.download.setFont(font)
         self.download.setObjectName("download")
 
+        self.mp3 = QtWidgets.QPushButton(self.download_box_widget)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+        )
+        self.mp3.setSizePolicy(sizePolicy)
+        self.mp3.setMinimumSize(QtCore.QSize(90, 0))
+        self.mp3.setFont(font)
+        self.mp3.setObjectName("mp3")
+
+        self.download_box.addWidget(self.download)
+        self.download_box.addWidget(self.mp3)
+
         self.layout_2.addWidget(self.list)
-        self.layout_2.addWidget(self.download)
+        self.layout_2.addWidget(self.download_box_widget)
 
         # Layout 3
         self.layout_widget_3 = QtWidgets.QWidget(self.centralwidget)
@@ -112,6 +132,7 @@ class MainUi(QtWidgets.QMainWindow):
 
         self.search.clicked.connect(self.search_button)
         self.download.clicked.connect(self.download_button)
+        self.mp3.clicked.connect(self.mp3_button)
         self.configuration.clicked.connect(self.config_button)
         self.list.itemSelectionChanged.connect(self.selection_changed)
 
@@ -121,6 +142,7 @@ class MainUi(QtWidgets.QMainWindow):
         self.configuration.setText("Configuracion")
         self.search.setText("Buscar")
         self.download.setText("Descargar")
+        self.mp3.setText("Mp3")
 
     def search_button(self):
         # Retrieves API Key
@@ -161,6 +183,25 @@ class MainUi(QtWidgets.QMainWindow):
 
             # Downloads video
             tools.download(id, download_folder)
+
+            msg = QtWidgets.QMessageBox()
+            msg.setWindowTitle("Descarga")
+            msg.setText("Descarga Completada")
+            msg.setIcon(QtWidgets.QMessageBox.Information)
+            msg.setWindowIcon(self.icon)
+            msg.exec_()
+
+    def mp3_button(self):
+        if self.list.selectedItems():
+            # Retrieves selected video
+            with open(get_path("resources/settings.json"), "r") as f:
+                download_folder = json.load(f)["folder"]
+
+            title = self.list.selectedItems()[0].text()
+            id = self.data[title]["id"]
+
+            # Downloads video
+            tools.download_mp3(id, download_folder)
 
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle("Descarga")

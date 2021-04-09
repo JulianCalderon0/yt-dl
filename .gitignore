@@ -1,6 +1,9 @@
 # User Settings
 src/resources/settings.json
 
+# Temp files
+src/temp
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
