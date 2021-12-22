@@ -20,4 +20,4 @@ Archivo principal: app.py
 
 6- Ingresar la clave en la pestaña de configuracion de la app. (YouDL)
 
-7- Especificar la carpeta de descarga. (Por defecto es la carpeta donde esta el .exe/.py)
+7- Especificar la carpeta de descarga. (Por defecto es la carpeta donde esta app.py)
