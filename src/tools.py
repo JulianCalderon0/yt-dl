@@ -1,6 +1,5 @@
 import requests
 from pytube import YouTube
-import json
 
 
 def search(query, key):

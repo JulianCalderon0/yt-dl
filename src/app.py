@@ -5,7 +5,6 @@ import sys
 from PyQt5 import QtWidgets
 
 from main import MainUi
-from tools import create_settings, get_path
 
 
 def run():
