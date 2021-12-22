@@ -3,8 +3,8 @@ import json
 from urllib.request import urlopen
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import helpers
-from helpers import get_path
+import tools
+from tools import get_path
 
 import settings
 
@@ -16,7 +16,7 @@ class MainUi(QtWidgets.QMainWindow):
         # Icon Setup
         self.icon = QtGui.QIcon()
         self.icon.addPixmap(
-            QtGui.QPixmap(helpers.get_path("resources/imgs/youtube.png")),
+            QtGui.QPixmap(tools.get_path("resources/imgs/youtube.png")),
         )
 
         # Font Setup
@@ -151,7 +151,7 @@ class MainUi(QtWidgets.QMainWindow):
         # Retrieves API Data
         q = str(self.input.text())
         if q:
-            self.data = helpers.search(q, key)
+            self.data = tools.search(q, key)
             if self.data == "error":
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle("Error")
@@ -182,7 +182,7 @@ class MainUi(QtWidgets.QMainWindow):
 
             # Downloads video
             self.setWindowTitle("Descargando")
-            helpers.download(id, download_folder)
+            tools.download(id, download_folder)
 
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle("Descarga")
@@ -204,7 +204,7 @@ class MainUi(QtWidgets.QMainWindow):
 
             # Downloads video
             self.setWindowTitle("Descargando")
-            helpers.download_audio(id, download_folder)
+            tools.download_audio(id, download_folder)
 
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle("Descarga")

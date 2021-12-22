@@ -5,25 +5,13 @@ import sys
 from PyQt5 import QtWidgets
 
 from main import MainUi
-from helpers import create_settings, get_path
+from tools import create_settings, get_path
 
 
 def run():
-    # Change cwd to main file dir
     cwd = os.path.dirname(os.path.realpath(__file__))
     os.chdir(cwd)
 
-    # Create settings.json if missing
-    path = get_path("resources/settings.json")
-    if os.path.exists(path):
-        with open(path, "r") as f:
-            data = json.load(f)
-            if list(data.keys()) != ["key", "folder"]:
-                create_settings()
-    else:
-        create_settings()
-
-    # Starts MainUI
     app = QtWidgets.QApplication(sys.argv)
     ui = MainUi()
     ui.show()
