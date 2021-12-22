@@ -4,7 +4,7 @@ from pytube import YouTube
 
 def search(query, key):
     url = "https://www.googleapis.com/youtube/v3/search"
-    parameters = {
+    params = {
         "q": query,
         "part": "id,snippet",
         "type": "video",
@@ -12,7 +12,7 @@ def search(query, key):
         "key": key,
     }
 
-    response = requests.get(url, params=parameters)
+    response = requests.get(url, params=params)
     if response.status_code in (400, 403):
         return "error"
     data = response.json()
