@@ -3,23 +3,21 @@ from pytube import YouTube
 import json
 
 
-def search(q, key):
+def search(query, key):
     url = "https://www.googleapis.com/youtube/v3/search"
     parameters = {
-        "q": q,
+        "q": query,
         "part": "id,snippet",
         "type": "video",
         "maxResults": 8,
         "key": key,
     }
 
-    # Retrieve data
     response = requests.get(url, params=parameters)
     if response.status_code in (400, 403):
         return "error"
     data = response.json()
 
-    # Reformat data
     data = data["items"]
     clean_data = {}
     for item in data:
@@ -37,7 +35,6 @@ def search(q, key):
 
 
 def download(id, download_folder):
-    # Download video
     url = "https://www.youtube.com/watch?v=" + id
     yt = YouTube(url)
     yt.streams.first().download(download_folder)
@@ -51,9 +48,3 @@ def download_audio(id, download_folder):
 
 def get_path(path):
     return path
-
-
-def create_settings():
-    with open(get_path("resources/settings.json"), "w") as f:
-        data = {"key": "", "folder": ""}
-        json.dump(data, f)
