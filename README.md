@@ -18,6 +18,6 @@ Archivo principal: app.py
 
 5- Crear la credencial/clave.
 
-6- Ingresar la clave en la pestaña de configuracion de la app. (YouDL)
+6- Ingresar la clave en la pestaña de configuracion de la app.
 
 7- Especificar la carpeta de descarga. (Por defecto es la carpeta donde esta app.py)
