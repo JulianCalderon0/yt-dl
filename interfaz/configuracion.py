@@ -1,25 +1,23 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+
 import json
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from tools import get_path
 
-
-class SettingsUi(QtWidgets.QWidget):
+class IUConfiguracion(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        # Icon Setup
         self.icon = QtGui.QIcon()
         self.icon.addPixmap(
-            QtGui.QPixmap(get_path("resources/imgs/gear.png")),
+            QtGui.QPixmap("recursos/imagenes/engranaje.png"),
         )
 
-        # Main Config
         self.setObjectName("settings")
         self.resize(471, 111)
         self.setWindowIcon(self.icon)
 
-        # Form Layout
+        # LAYOUT 1
+
         self.layout_widget1 = QtWidgets.QWidget(self)
         self.layout_widget1.setGeometry(QtCore.QRect(10, 0, 451, 71))
         self.layout_widget1.setObjectName("layout_widget1")
@@ -32,9 +30,11 @@ class SettingsUi(QtWidgets.QWidget):
 
         self.key_label = QtWidgets.QLabel(self.layout_widget1)
         self.key_label.setObjectName("key_label")
+
         self.key_input = QtWidgets.QLineEdit(self.layout_widget1)
         self.key_input.setMinimumSize(QtCore.QSize(0, 21))
         self.key_input.setObjectName("key_input")
+
         self.folder_label = QtWidgets.QLabel(self.layout_widget1)
         self.folder_label.setObjectName("folder_label")
 
@@ -50,6 +50,7 @@ class SettingsUi(QtWidgets.QWidget):
         self.folder_input.setMinimumSize(QtCore.QSize(0, 21))
         self.folder_input.setText("")
         self.folder_input.setObjectName("folder_input")
+
         self.browse = QtWidgets.QPushButton(self.layout_widget1)
         self.browse.setMinimumSize(QtCore.QSize(0, 20))
         self.browse.setObjectName("browse")
@@ -62,7 +63,8 @@ class SettingsUi(QtWidgets.QWidget):
         self.layout1.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.folder_label)
         self.layout1.setLayout(1, QtWidgets.QFormLayout.FieldRole, self.folder_layout)
 
-        # Save Layout
+        # LAYOUT 2
+
         self.layout_widget2 = QtWidgets.QWidget(self)
         self.layout_widget2.setGeometry(QtCore.QRect(10, 80, 451, 25))
         self.layout_widget2.setObjectName("layout_widget2")
@@ -79,41 +81,37 @@ class SettingsUi(QtWidgets.QWidget):
         self.layout2.addItem(spacerItem)
         self.layout2.addWidget(self.save)
 
-        # End Config
-        self.retranslateUi(self)
+        self.nombrar(self)
         QtCore.QMetaObject.connectSlotsByName(self)
 
-        # Functions
-        self.save.clicked.connect(self.save_button)
-        self.browse.clicked.connect(self.browse_button)
+        self.save.clicked.connect(self.guardar)
+        self.browse.clicked.connect(self.navegar)
 
-    def retranslateUi(self, Form):
-        # Sets GUI Text
+    def nombrar(self, Form):
         Form.setWindowTitle("Configuracion")
         self.save.setText("Guardar")
         self.key_label.setText("Clave del API:")
         self.folder_label.setText("Carpeta de Descarga:")
         self.browse.setText("...")
 
-        # Retrieves settings data
-        with open(get_path("resources/settings.json"), "r") as f:
+        with open("recursos/configuracion.json", "r") as f:
             data = json.load(f)
 
-        key = data["key"]
-        download_folder = data["folder"]
+        key = data["clave"]
+        download_folder = data["carpeta"]
 
         self.key_input.setText(key)
         self.folder_input.setText(download_folder)
 
-    def save_button(self):
+    def guardar(self):
         # Saves data to settings.json
-        data = {"key": self.key_input.text(), "folder": self.folder_input.text()}
-        with open(get_path("resources/settings.json"), "w") as f:
+        data = {"clave": self.key_input.text(), "carpeta": self.folder_input.text()}
+        with open("recursos/configuracion.json", "w") as f:
             json.dump(data, f)
 
         self.close()
 
-    def browse_button(self):
+    def navegar(self):
         # Selects download folder
         download_folder = QtWidgets.QFileDialog.getExistingDirectory(
             None,
