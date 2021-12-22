@@ -2,9 +2,11 @@
 
 Busca y descarga videos de YouTube (Necesita clave de API)
 
-Tanto el video como el audio es en formato .mp4
+El formato del video/audio es .mp4
 
-Archivo principal: app.py
+Instalar las bibliotecas mencionadas en __requisitos.txt__
+Para correrlo, ejecutar __main.pyw__
+
 
 ## Para funcionar necesita una clave de la API de google:
 
@@ -18,6 +20,8 @@ Archivo principal: app.py
 
 5- Crear la credencial/clave.
 
-6- Ingresar la clave en la pestaña de configuracion de la app.
+6- Abrir la pestaña de configuracion de la aplicacion.
 
-7- Especificar la carpeta de descarga. (Por defecto es la carpeta donde esta app.py)
+7- Ingresar la clave
+
+8- Especificar la carpeta de descarga (por defecto es la carpeta principal)

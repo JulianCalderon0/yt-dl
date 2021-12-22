@@ -1,22 +1,21 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+
 import html
 import json
 from urllib.request import urlopen
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-import tools
-from tools import get_path
-
-import settings
+import api.api as api
+from interfaz.configuracion import IUConfiguracion
 
 
-class MainUi(QtWidgets.QMainWindow):
+class IUPrincipal(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
 
         # Icon Setup
         self.icon = QtGui.QIcon()
         self.icon.addPixmap(
-            QtGui.QPixmap(tools.get_path("resources/imgs/youtube.png")),
+            QtGui.QPixmap("recursos/imagenes/youtube.png"),
         )
 
         # Font Setup
@@ -113,7 +112,7 @@ class MainUi(QtWidgets.QMainWindow):
         self.thumbnail = QtWidgets.QLabel(self.layout_widget_3)
         self.thumbnail.setMaximumSize(QtCore.QSize(240, 180))
         self.thumbnail.setText("")
-        self.thumbnail.setPixmap(QtGui.QPixmap(get_path("resources/imgs/default.jpg")))
+        self.thumbnail.setPixmap(QtGui.QPixmap("recursos/imagenes/default.jpg"))
         self.thumbnail.setScaledContents(True)
         self.thumbnail.setObjectName("thumbnail")
         self.description = QtWidgets.QTextBrowser(self.layout_widget_3)
@@ -144,15 +143,13 @@ class MainUi(QtWidgets.QMainWindow):
         self.audio.setText("Audio")
 
     def search_button(self):
-        # Retrieves API Key
-        with open(get_path("resources/settings.json"), "r") as f:
-            key = json.load(f)["key"]
+        with open("recursos/configuracion.json", "r") as f:
+            key = json.load(f)["clave"]
 
-        # Retrieves API Data
         q = str(self.input.text())
         if q:
-            self.data = tools.search(q, key)
-            if self.data == "error":
+            self.data = api.buscar(q, key)
+            if self.data == api.ERROR:
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle("Error")
                 msg.setText("Error con la clave")
@@ -161,7 +158,6 @@ class MainUi(QtWidgets.QMainWindow):
                 msg.exec_()
                 return
 
-            # Adds data to list
             self.list.clear()
             new_data = {}
             for title in self.data.keys():
@@ -173,16 +169,14 @@ class MainUi(QtWidgets.QMainWindow):
 
     def download_button(self):
         if self.list.selectedItems():
-            # Retrieves selected video
-            with open(get_path("resources/settings.json"), "r") as f:
+            with open("recursos/configuracion.json", "r") as f:
                 download_folder = json.load(f)["folder"]
 
             title = self.list.selectedItems()[0].text()
             id = self.data[title]["id"]
 
-            # Downloads video
             self.setWindowTitle("Descargando")
-            tools.download(id, download_folder)
+            api.descargar_video(id, download_folder)
 
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle("Descarga")
@@ -196,7 +190,7 @@ class MainUi(QtWidgets.QMainWindow):
     def audio_button(self):
         if self.list.selectedItems():
             # Retrieves selected video
-            with open(get_path("resources/settings.json"), "r") as f:
+            with open("recursos/settings.json", "r") as f:
                 download_folder = json.load(f)["folder"]
 
             title = self.list.selectedItems()[0].text()
@@ -204,7 +198,7 @@ class MainUi(QtWidgets.QMainWindow):
 
             # Downloads video
             self.setWindowTitle("Descargando")
-            tools.download_audio(id, download_folder)
+            api.descargar_audio(id, download_folder)
 
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle("Descarga")
@@ -219,35 +213,28 @@ class MainUi(QtWidgets.QMainWindow):
         if self.list.selectedItems():
             self.resize(641, 431)
 
-            # Retrieves data
             title = self.list.selectedItems()[0].text()
             author = self.data[title]["channel"]
             date = self.data[title]["date"].replace("T", " ").replace("Z", " ")
             description = self.data[title]["description"]
 
-            # Sets thumbnail
             url = self.data[title]["thumbnail"]["url"]
             img = urlopen(url).read()
             pixmap = QtGui.QPixmap()
             pixmap.loadFromData(img)
             self.thumbnail.setPixmap(pixmap)
 
-            # Sets description
-            with open(get_path("resources/static/description.html"), "r") as f:
+            with open("recursos/descripcion.html", "r") as f:
                 self.description.setHtml(
                     f.read().format(
                         title=title, author=author, date=date, description=description
                     )
                 )
         else:
-            # Resets thumbnail and description when deselect
             self.resize(641, 220)
-            self.thumbnail.setPixmap(
-                QtGui.QPixmap(get_path("resources/imgs/default.jpg"))
-            )
+            self.thumbnail.setPixmap(QtGui.QPixmap("recursos/imgs/default.jpg"))
             self.description.setHtml("")
 
     def config_button(self):
-        # Open settings
-        self.ui_settings = settings.SettingsUi()
+        self.ui_settings = IUConfiguracion()
         self.ui_settings.show()

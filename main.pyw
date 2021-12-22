@@ -3,18 +3,18 @@ import sys
 
 from PyQt5 import QtWidgets
 
-from main import MainUi
+from interfaz.principal import IUPrincipal
 
 
 def run():
     cwd = os.path.dirname(os.path.realpath(__file__))
     os.chdir(cwd)
 
-    app = QtWidgets.QApplication(sys.argv)
-    ui = MainUi()
+    main = QtWidgets.QApplication(sys.argv)
+    principal = IUPrincipal()
 
-    ui.show()
-    sys.exit(app.exec_())
+    principal.show()
+    sys.exit(main.exec_())
 
 
 if __name__ == "__main__":
