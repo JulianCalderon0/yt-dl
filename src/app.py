@@ -13,6 +13,7 @@ def run():
 
     app = QtWidgets.QApplication(sys.argv)
     ui = MainUi()
+
     ui.show()
     sys.exit(app.exec_())
 
