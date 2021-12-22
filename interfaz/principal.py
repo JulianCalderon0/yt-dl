@@ -170,7 +170,7 @@ class IUPrincipal(QtWidgets.QMainWindow):
     def download_button(self):
         if self.list.selectedItems():
             with open("recursos/configuracion.json", "r") as f:
-                download_folder = json.load(f)["folder"]
+                download_folder = json.load(f)["carpeta"]
 
             title = self.list.selectedItems()[0].text()
             id = self.data[title]["id"]
@@ -191,7 +191,7 @@ class IUPrincipal(QtWidgets.QMainWindow):
         if self.list.selectedItems():
             # Retrieves selected video
             with open("recursos/settings.json", "r") as f:
-                download_folder = json.load(f)["folder"]
+                download_folder = json.load(f)["carpeta"]
 
             title = self.list.selectedItems()[0].text()
             id = self.data[title]["id"]
