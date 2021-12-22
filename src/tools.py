@@ -36,7 +36,7 @@ def search(query, key):
 def download(id, download_folder):
     url = "https://www.youtube.com/watch?v=" + id
     yt = YouTube(url)
-    yt.streams.first().download(download_folder)
+    yt.streams.get_highest_resolution().download(download_folder)
 
 
 def download_audio(id, download_folder):
