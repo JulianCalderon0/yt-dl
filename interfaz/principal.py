@@ -190,7 +190,7 @@ class IUPrincipal(QtWidgets.QMainWindow):
     def audio_button(self):
         if self.list.selectedItems():
             # Retrieves selected video
-            with open("data/settings.json", "r") as f:
+            with open("data/configuracion.json", "r") as f:
                 download_folder = json.load(f)["carpeta"]
 
             title = self.list.selectedItems()[0].text()
