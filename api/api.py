@@ -1,5 +1,6 @@
 import requests
 from pytube import YouTube
+import json
 
 EXITO = 200
 ERROR = -1
@@ -22,17 +23,15 @@ def buscar(consulta, clave):
     if respuesta.status_code != EXITO:
         return ERROR
 
-    data = respuesta.json()
-
-    data = data["items"]
+    data = respuesta.json()["items"]
     f_data = {}
     for video in data:
         f_video = {
             "id": video["id"]["videoId"],
-            "channel": video["snippet"]["channelTitle"],
-            "description": video["snippet"]["description"],
-            "date": video["snippet"]["publishedAt"],
-            "thumbnail": video["snippet"]["thumbnails"]["high"],
+            "canal": video["snippet"]["channelTitle"],
+            "descripcion": video["snippet"]["description"],
+            "fecha": video["snippet"]["publishedAt"],
+            "miniatura": video["snippet"]["thumbnails"]["high"],
         }
         f_data[video["snippet"]["title"]] = f_video
 

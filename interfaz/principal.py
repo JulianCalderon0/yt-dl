@@ -2,6 +2,10 @@ import html
 import json
 import tkinter as tk
 
+from PIL import Image, ImageTk
+import requests
+import io
+
 import api.api as api
 
 from interfaz.configuracion import IUConfiguracion
@@ -39,6 +43,9 @@ class IUPrincipal:
         self.lista_resultados.grid(
             column=0, row=1, columnspan=2, sticky="NSEW", padx=5, pady=7
         )
+        self.lista_resultados.bind("<<ListboxSelect>>", self.seleccion)
+
+        self.seleccion(None)
 
     def buscar(self):
         with open(RUTA_CONFIGURACION, "r") as archivo:
@@ -79,3 +86,37 @@ class IUPrincipal:
 
     def configurar(self):
         self.configuracion = IUConfiguracion(tk.Toplevel())
+
+    def seleccion(self, evento):
+        seleccion = self.lista_resultados.curselection()
+        if not seleccion:
+            return
+
+        self.descripcion = tk.Frame(self.raiz)
+        self.descripcion.grid(column=0, row=2, columnspan=3)
+
+        titulo = self.lista_resultados.get(seleccion[0])
+        url = self.info_resultados[titulo]["miniatura"]["url"]
+
+        data = requests.get(url).content
+        img = Image.open(io.BytesIO(data)).resize((240, 180))
+        self.miniatura = ImageTk.PhotoImage(img)
+
+        self.etiqueta_imagen = tk.Label(self.descripcion, image=self.miniatura)
+        self.etiqueta_imagen.grid(column=0, row=0, sticky="NSEW", padx=5, pady=5)
+
+        canal = self.info_resultados[titulo]["canal"]
+        fecha = self.info_resultados[titulo]["fecha"]
+        descripcion = self.info_resultados[titulo]["descripcion"]
+
+        self.descripcion_texto = tk.Text(
+            self.descripcion, height=10, width=50, wrap=tk.WORD
+        )
+        self.descripcion_texto.grid(column=1, row=0, sticky="NSEW", padx=5, pady=5)
+
+        formato = f"{titulo}\n\n{canal}\n\n{fecha}{descripcion}"
+
+        self.descripcion_texto.delete(1.0, tk.END)
+        self.descripcion_texto.insert(tk.INSERT, formato)
+
+        self.descripcion_texto.config(state=tk.DISABLED)
