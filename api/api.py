@@ -3,7 +3,7 @@ from pytube import YouTube
 
 EXITO = 200
 ERROR = -1
-MAX_RESULTADOS = 8
+MAX_RESULTADOS = 10
 URL_API = "https://www.googleapis.com/youtube/v3/search"
 
 
