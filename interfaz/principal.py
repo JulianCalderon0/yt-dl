@@ -7,12 +7,10 @@ import api.api as api
 from interfaz.configuracion import IUConfiguracion
 from interfaz.constantes import RUTA_CONFIGURACION, RUTA_YOUTUBE
 
-TITULO_PRINCIPAL = "YT-DL"
-
 
 class IUPrincipal:
     def __init__(self, raiz):
-        raiz.title(TITULO_PRINCIPAL)
+        raiz.title("YT-DL")
         raiz.iconbitmap(RUTA_YOUTUBE)
         tk.Frame(raiz).grid(column=0, row=0)
         self.raiz = raiz
@@ -52,6 +50,7 @@ class IUPrincipal:
 
         self.info_resultados = api.buscar(consulta, clave)
         if self.info_resultados == api.ERROR:
+            tk.messagebox.showerror(message="La clave es invalida", title="Clave")
             return
 
         for titulo in [*self.info_resultados.keys()]:
@@ -72,9 +71,11 @@ class IUPrincipal:
         titulo = self.lista_resultados.get(seleccion[0])
         id = self.info_resultados[titulo]["id"]
 
-        self.raiz.title("Descargando")
         api.descargar_video(id, destino)
-        self.raiz.title(TITULO_PRINCIPAL)
+
+        tk.messagebox.showinfo(
+            message="El video se descargo correctamente", title="Descarga"
+        )
 
     def configurar(self):
-        self.configuracion = IUConfiguracion(tk.Toplevel())
+        configuracion = IUConfiguracion(tk.Toplevel())
