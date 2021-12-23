@@ -1,3 +1,0 @@
-PyTube
-PyQt5
-Requests
