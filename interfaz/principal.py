@@ -16,6 +16,7 @@ class IUPrincipal:
     def __init__(self, raiz):
         raiz.title("YT-DL")
         raiz.iconbitmap(RUTA_YOUTUBE)
+        raiz.resizable(False, False)
         tk.Frame(raiz).grid(column=0, row=0)
         self.raiz = raiz
 

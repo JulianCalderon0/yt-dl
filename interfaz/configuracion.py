@@ -9,6 +9,7 @@ class IUConfiguracion:
     def __init__(self, raiz):
         raiz.title("Configuracion")
         raiz.iconbitmap(RUTA_ENGRANAJE)
+        raiz.resizable(False, False)
         tk.Frame(raiz).grid(column=0, row=0)
         self.raiz = raiz
 
