@@ -8,5 +8,5 @@ if __name__ == "__main__":
     os.chdir(cwd)
 
     root = tk.Tk()
-    IUPrincipal(root)
+    principal = IUPrincipal(root)
     root.mainloop()
