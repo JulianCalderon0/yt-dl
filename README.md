@@ -2,8 +2,6 @@
 
 Busca y descarga videos de YouTube (Necesita clave de API)
 
-El formato del video es .mp4
-
 Instalar las bibliotecas mencionadas en __requirements.txt__
 
 Para correrlo, ejecutar __main.pyw__
