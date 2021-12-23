@@ -114,7 +114,7 @@ class IUPrincipal:
         )
         self.descripcion_texto.grid(column=1, row=0, sticky="NSEW", padx=5, pady=5)
 
-        formato = f"{titulo}\n\n{canal}\n\n{fecha}{descripcion}"
+        formato = f"{titulo}\n\n{canal}\n\n{fecha}\n\n{descripcion}"
 
         self.descripcion_texto.delete(1.0, tk.END)
         self.descripcion_texto.insert(tk.INSERT, formato)
