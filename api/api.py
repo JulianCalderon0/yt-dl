@@ -4,10 +4,11 @@ from pytube import YouTube
 EXITO = 200
 ERROR = -1
 MAX_RESULTADOS = 8
+URL_API = "https://www.googleapis.com/youtube/v3/search"
 
 
 def buscar(consulta, clave):
-    url = "https://www.googleapis.com/youtube/v3/search"
+    url = URL_API
     parametros = {
         "q": consulta,
         "part": "id,snippet",
