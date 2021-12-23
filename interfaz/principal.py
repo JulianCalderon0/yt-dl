@@ -53,7 +53,7 @@ class IUPrincipal:
             tk.messagebox.showerror(message="La clave es invalida", title="Clave")
             return
 
-        for titulo in [*self.info_resultados.keys()]:
+        for titulo in list(self.info_resultados.keys()):
             f_titulo = html.unescape(titulo)
             self.info_resultados[f_titulo] = self.info_resultados.pop(titulo)
 
