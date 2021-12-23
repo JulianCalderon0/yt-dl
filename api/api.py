@@ -8,6 +8,15 @@ MAX_RESULTADOS = 8
 
 
 def buscar(consulta, clave):
+    """
+    Recibe una consulta y una clave de la API de Google. LLama al metodo de busqueda de la API.
+
+    Devuelve un diccionario de MAX_RESULTADOS, donde cada clave es el titulo del video,
+    y sus valores son las propiedades del video.
+
+    Devuelve ERROR en caso de ERROR.
+    """
+
     url = "https://www.googleapis.com/youtube/v3/search"
     parametros = {
         "q": consulta,
@@ -40,12 +49,12 @@ def buscar(consulta, clave):
 
 
 def descargar_video(id, destino):
+    """
+    Recibe la ID de un video de youtube y una carpeta de destino.
+
+    Descarga la opcion com mayor resolucion del video en la carpeta especificada.
+    """
+
     url = "https://www.youtube.com/watch?v=" + id
     yt = YouTube(url)
     yt.streams.get_highest_resolution().download(destino)
-
-
-def descargar_audio(id, destino):
-    url = "https://www.youtube.com/watch?v=" + id
-    yt = YouTube(url)
-    yt.streams.get_audio_only().download(destino)

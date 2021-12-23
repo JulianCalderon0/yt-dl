@@ -15,7 +15,7 @@ class IUPrincipal(QtWidgets.QMainWindow):
         # Icon Setup
         self.icon = QtGui.QIcon()
         self.icon.addPixmap(
-            QtGui.QPixmap("recursos/imagenes/youtube.png"),
+            QtGui.QPixmap("data/assets/youtube.png"),
         )
 
         # Font Setup
@@ -112,7 +112,7 @@ class IUPrincipal(QtWidgets.QMainWindow):
         self.thumbnail = QtWidgets.QLabel(self.layout_widget_3)
         self.thumbnail.setMaximumSize(QtCore.QSize(240, 180))
         self.thumbnail.setText("")
-        self.thumbnail.setPixmap(QtGui.QPixmap("recursos/imagenes/default.jpg"))
+        self.thumbnail.setPixmap(QtGui.QPixmap("data/assets/default.jpg"))
         self.thumbnail.setScaledContents(True)
         self.thumbnail.setObjectName("thumbnail")
         self.description = QtWidgets.QTextBrowser(self.layout_widget_3)
@@ -143,7 +143,7 @@ class IUPrincipal(QtWidgets.QMainWindow):
         self.audio.setText("Audio")
 
     def search_button(self):
-        with open("recursos/configuracion.json", "r") as f:
+        with open("data/configuracion.json", "r") as f:
             key = json.load(f)["clave"]
 
         q = str(self.input.text())
@@ -169,7 +169,7 @@ class IUPrincipal(QtWidgets.QMainWindow):
 
     def download_button(self):
         if self.list.selectedItems():
-            with open("recursos/configuracion.json", "r") as f:
+            with open("data/configuracion.json", "r") as f:
                 download_folder = json.load(f)["carpeta"]
 
             title = self.list.selectedItems()[0].text()
@@ -190,7 +190,7 @@ class IUPrincipal(QtWidgets.QMainWindow):
     def audio_button(self):
         if self.list.selectedItems():
             # Retrieves selected video
-            with open("recursos/settings.json", "r") as f:
+            with open("data/settings.json", "r") as f:
                 download_folder = json.load(f)["carpeta"]
 
             title = self.list.selectedItems()[0].text()
@@ -224,7 +224,7 @@ class IUPrincipal(QtWidgets.QMainWindow):
             pixmap.loadFromData(img)
             self.thumbnail.setPixmap(pixmap)
 
-            with open("recursos/descripcion.html", "r") as f:
+            with open("data/formato_descripcion.html", "r") as f:
                 self.description.setHtml(
                     f.read().format(
                         title=title, author=author, date=date, description=description
@@ -232,7 +232,7 @@ class IUPrincipal(QtWidgets.QMainWindow):
                 )
         else:
             self.resize(641, 220)
-            self.thumbnail.setPixmap(QtGui.QPixmap("recursos/imgs/default.jpg"))
+            self.thumbnail.setPixmap(QtGui.QPixmap("data/assets/default.jpg"))
             self.description.setHtml("")
 
     def config_button(self):

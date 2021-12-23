@@ -9,15 +9,14 @@ class IUConfiguracion(QtWidgets.QWidget):
 
         self.icon = QtGui.QIcon()
         self.icon.addPixmap(
-            QtGui.QPixmap("recursos/imagenes/engranaje.png"),
+            QtGui.QPixmap("data/assets/gear.png"),
         )
 
-        self.setObjectName("settings")
+        self.setObjectName("configuracion")
         self.resize(471, 111)
         self.setWindowIcon(self.icon)
 
         # LAYOUT 1
-
         self.layout_widget1 = QtWidgets.QWidget(self)
         self.layout_widget1.setGeometry(QtCore.QRect(10, 0, 451, 71))
         self.layout_widget1.setObjectName("layout_widget1")
@@ -94,7 +93,7 @@ class IUConfiguracion(QtWidgets.QWidget):
         self.folder_label.setText("Carpeta de Descarga:")
         self.browse.setText("...")
 
-        with open("recursos/configuracion.json", "r") as f:
+        with open("data/configuracion.json", "r") as f:
             data = json.load(f)
 
         key = data["clave"]
@@ -106,7 +105,7 @@ class IUConfiguracion(QtWidgets.QWidget):
     def guardar(self):
         # Saves data to settings.json
         data = {"clave": self.key_input.text(), "carpeta": self.folder_input.text()}
-        with open("recursos/configuracion.json", "w") as f:
+        with open("data/configuracion.json", "w") as f:
             json.dump(data, f)
 
         self.close()
