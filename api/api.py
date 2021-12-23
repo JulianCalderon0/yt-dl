@@ -31,7 +31,7 @@ def buscar(consulta, clave):
             "canal": video["snippet"]["channelTitle"],
             "descripcion": video["snippet"]["description"],
             "fecha": video["snippet"]["publishedAt"],
-            "miniatura": video["snippet"]["thumbnails"]["high"],
+            "miniatura": video["snippet"]["thumbnails"]["high"]["url"],
         }
         f_data[video["snippet"]["title"]] = f_video
 

@@ -111,7 +111,7 @@ class IUPrincipal:
         self.descripcion_texto.insert(tk.INSERT, formato)
         self.descripcion_texto.config(state=tk.DISABLED)
 
-        url = self.info_resultados[titulo]["miniatura"]["url"]
+        url = self.info_resultados[titulo]["miniatura"]
         data = requests.get(url).content
         img = Image.open(io.BytesIO(data)).resize((240, 180))
         self.miniatura = ImageTk.PhotoImage(img)
