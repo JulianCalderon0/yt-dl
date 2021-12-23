@@ -57,6 +57,7 @@ class IUConfiguracion:
 
     def navegar(self):
         self.var_carpeta.set(filedialog.askdirectory())
+        self.entrada_carpeta.focus_set()
 
 
 if __name__ == "__main__":
