@@ -2,7 +2,7 @@
 
 Busca y descarga videos de YouTube (Necesita clave de API)
 
-El formato del video/audio es .mp4
+El formato del video es .mp4
 
 Instalar las bibliotecas mencionadas en __requirements.txt__
 
