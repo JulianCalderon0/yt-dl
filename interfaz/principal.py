@@ -106,7 +106,7 @@ class IUPrincipal:
         self.etiqueta_imagen.grid(column=0, row=0, sticky="NSEW", padx=5, pady=5)
 
         canal = self.info_resultados[titulo]["canal"]
-        fecha = self.info_resultados[titulo]["fecha"]
+        fecha = self.info_resultados[titulo]["fecha"][:10]
         descripcion = self.info_resultados[titulo]["descripcion"]
 
         self.descripcion_texto = tk.Text(
