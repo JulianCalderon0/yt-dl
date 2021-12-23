@@ -28,9 +28,11 @@ class IUConfiguracion:
         )
         self.entrada_carpeta.grid(column=1, row=1, sticky="EW", padx=5, pady=5)
 
-        self.boton_navegar = tk.Button(raiz, text="...", command=self.navegar, width=9)
+        self.boton_navegar = tk.Button(
+            raiz, text="...", command=self.navegar, width=9, pady=0
+        )
         self.boton_guardar = tk.Button(
-            raiz, text="Guardar", command=self.guardar, width=9
+            raiz, text="Guardar", command=self.guardar, width=9, pady=0
         )
 
         self.boton_navegar.grid(column=2, row=1, sticky="NSEW", padx=5, pady=5)

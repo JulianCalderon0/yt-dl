@@ -22,13 +22,13 @@ class IUPrincipal:
         self.entrada_busqueda.grid(column=0, row=0, sticky="NSEW", padx=5, pady=7)
 
         self.boton_buscar = tk.Button(
-            raiz, text="Buscar", command=self.buscar, width=12
+            raiz, text="Buscar", command=self.buscar, width=12, pady=0
         )
         self.boton_configurar = tk.Button(
-            raiz, text="Configuracion", command=self.configurar, width=12
+            raiz, text="Configuracion", command=self.configurar, width=12, pady=0
         )
         self.boton_descargar = tk.Button(
-            raiz, text="Descargar", command=self.descargar, width=12
+            raiz, text="Descargar", command=self.descargar, width=12, pady=0
         )
 
         self.boton_buscar.grid(column=1, row=0, sticky="NSEW", padx=5, pady=7)
