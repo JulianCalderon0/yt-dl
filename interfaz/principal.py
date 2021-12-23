@@ -55,10 +55,11 @@ class IUPrincipal:
         if not consulta:
             return
 
-        self.info_resultados = api.buscar(consulta, clave)
-        if self.info_resultados == api.ERROR:
+        respuesta = api.buscar(consulta, clave)
+        if respuesta == api.ERROR:
             tk.messagebox.showerror(message="La clave es invalida", title="Clave")
             return
+        self.info_resultados = respuesta
 
         for titulo in list(self.info_resultados.keys()):
             f_titulo = html.unescape(titulo)
