@@ -97,27 +97,24 @@ class IUPrincipal:
         self.descripcion.grid(column=0, row=2, columnspan=3)
 
         titulo = self.lista_resultados.get(seleccion[0])
-        url = self.info_resultados[titulo]["miniatura"]["url"]
-
-        data = requests.get(url).content
-        img = Image.open(io.BytesIO(data)).resize((240, 180))
-        self.miniatura = ImageTk.PhotoImage(img)
-
-        self.etiqueta_imagen = tk.Label(self.descripcion, image=self.miniatura)
-        self.etiqueta_imagen.grid(column=0, row=0, sticky="NSEW", padx=5, pady=5)
-
         canal = self.info_resultados[titulo]["canal"]
         fecha = self.info_resultados[titulo]["fecha"][:10]
         descripcion = self.info_resultados[titulo]["descripcion"]
+        formato = f"{titulo}\n\n{canal}\n\n{fecha}\n\n{descripcion}"
 
         self.descripcion_texto = tk.Text(
             self.descripcion, height=10, width=50, wrap=tk.WORD
         )
         self.descripcion_texto.grid(column=1, row=0, sticky="NSEW", padx=5, pady=5)
 
-        formato = f"{titulo}\n\n{canal}\n\n{fecha}\n\n{descripcion}"
-
         self.descripcion_texto.delete(1.0, tk.END)
         self.descripcion_texto.insert(tk.INSERT, formato)
-
         self.descripcion_texto.config(state=tk.DISABLED)
+
+        url = self.info_resultados[titulo]["miniatura"]["url"]
+        data = requests.get(url).content
+        img = Image.open(io.BytesIO(data)).resize((240, 180))
+        self.miniatura = ImageTk.PhotoImage(img)
+
+        self.etiqueta_imagen = tk.Label(self.descripcion, image=self.miniatura)
+        self.etiqueta_imagen.grid(column=0, row=0, sticky="NSEW", padx=5, pady=5)
