@@ -1,3 +1,4 @@
+import html
 import io
 import json
 import tkinter as tk
