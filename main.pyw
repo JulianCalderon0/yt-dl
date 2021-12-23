@@ -1,4 +1,4 @@
-import os.path
+import os
 import tkinter as tk
 
 from interfaz.principal import IUPrincipal
@@ -8,5 +8,5 @@ if __name__ == "__main__":
     os.chdir(cwd)
 
     root = tk.Tk()
-    principal = IUPrincipal(root)
+    IUPrincipal(root)
     root.mainloop()

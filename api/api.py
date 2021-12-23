@@ -1,6 +1,5 @@
 import requests
 from pytube import YouTube
-import json
 
 EXITO = 200
 ERROR = -1

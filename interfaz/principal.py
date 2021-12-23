@@ -1,12 +1,10 @@
-import html
+import io
 import json
 import tkinter as tk
 
-from PIL import Image, ImageTk
-import requests
-import io
-
 import api.api as api
+import requests
+from PIL import Image, ImageTk
 
 from interfaz.configuracion import IUConfiguracion
 from interfaz.constantes import RUTA_CONFIGURACION, RUTA_YOUTUBE
