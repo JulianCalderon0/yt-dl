@@ -53,6 +53,7 @@ class IUConfiguracion:
         data = {"clave": self.var_clave.get(), "carpeta": self.var_carpeta.get()}
         with open(RUTA_CONFIGURACION, "w") as archivo:
             json.dump(data, archivo)
+        self.raiz.destroy()
 
     def navegar(self):
         self.var_carpeta.set(filedialog.askdirectory())
