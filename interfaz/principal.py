@@ -78,4 +78,4 @@ class IUPrincipal:
         )
 
     def configurar(self):
-        configuracion = IUConfiguracion(tk.Toplevel())
+        self.configuracion = IUConfiguracion(tk.Toplevel())
