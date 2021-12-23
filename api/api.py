@@ -58,3 +58,9 @@ def descargar_video(id, destino):
     url = "https://www.youtube.com/watch?v=" + id
     yt = YouTube(url)
     yt.streams.get_highest_resolution().download(destino)
+
+
+def descargar_audio(id, destino):
+    url = "https://www.youtube.com/watch?v=" + id
+    yt = YouTube(url)
+    yt.streams.get_audio_only().download(destino)
