@@ -24,3 +24,5 @@ Para correrlo, ejecutar __main.pyw__
 7- Ingresar la clave
 
 8- Especificar la carpeta de descarga (por defecto es la carpeta principal)
+
+\\(O_O)//
